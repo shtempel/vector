@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvass</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="main">
+    <div class="left-panel">
+        <ul class="figures" id="figures">
+            <li id="square" class="square" selected="false"></li>
+            <li id="circle" class="circle" selected="false"></li>
+            <li id="line" class="line" selected="false"></li>
+        </ul>
+        <div>
+            <label>Color:</label>
+            <input id="color_field" class="color">
+            <button id="change_clr_btn" class="chng_clr">Change color</button>
+        </div>
+    </div>
+    <div class="canvas">
+        <canvas id="canvas" width="500" height="400"></canvas>
+    </div>
+    <div class="json-btns">
+        <button class="sv" id="save_json_btn">Save to json</button>
+        <button class="ld" id="load_json_btn">Load from json</button>
+        <button class="clear" id="clear_btn">Clear all</button>
+
+    </div>
+    <div class="bottom">
+        <textarea id="json_txt_field" class="txt-area"></textarea>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="./js/code.js"></script>
+</html>

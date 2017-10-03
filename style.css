@@ -1,0 +1,88 @@
+.main {
+    border: solid gray 1px;
+    left: 10px;
+    top: 10px;
+}
+
+.canvas {
+    margin: 30px 30px 10px 30px;
+    display: inline-block;
+    float: right;
+}
+
+.main {
+    position: absolute;
+}
+
+.figures {
+
+    height: 200px;
+    padding-left: 0px;
+}
+
+.figures, .canvas {
+    border: solid gray 1px;
+}
+
+.left-panel {
+    width: 100px;
+    height: 400px;
+    display: inline-block;
+    margin-left: 30px;
+    margin-top: 30px;
+}
+
+.color {
+    width: 50px;
+    display: block;
+}
+
+[selected=true] {
+    border: solid 1px #2aabd2;
+}
+
+.bottom {
+    height: 100px;
+
+    margin: 10px 30px 30px 160px;
+}
+
+.selected {
+    border: solid 1px #2aabd2;
+
+}
+
+.ld, .sv, .clear {
+    width: 120px;
+    height: 30px;
+    display: inline-block;
+    margin-left: 160px;
+}
+
+.ld, .clear {
+    margin-left: 50px;
+}
+
+.txt-area {
+    height: 50px;
+    resize: none;
+    width: 500px;
+}
+
+.square, .circle, .line {
+    height: 30%;
+    list-style-type: none;
+}
+
+.square {
+    background: url("./pics/square.jpg") center no-repeat;
+
+}
+
+.circle {
+    background: url("./pics/circle.jpg") center no-repeat;
+}
+
+.line {
+    background: url("./pics/line.jpg") center no-repeat;
+}
