@@ -14,20 +14,20 @@ function Rect(x, y, w, h, color, number, type) {
 Rect.prototype = new Shape();
 Rect.prototype.draw = function () {
     view.getCanvasContext().strokeStyle = this.color;
-    view.getCanvasContext().strokeRect(this.x, this.y, this.w, this.h);
+    view.getCanvasContext().strokeRect(this.x, this.y, Math.abs(this.w), Math.abs(this.h))  ;
 };
 
 Rect.prototype.drawSelected = function () {
     view.getCanvasContext().strokeStyle = "gray";
-    view.getCanvasContext().strokeRect(this.x - 6, this.y - 6, this.w + 12, this.h + 12);
+    view.getCanvasContext().strokeRect(this.x - 6, this.y - 6, Math.abs(this.w) + 12, Math.abs(this.h) + 12);
 };
 Rect.prototype.select = function () {
     this.selected = !this.selected;
 };
 
 Rect.prototype.isCursorInFigure = function (mouse) {
-    return mouse.xMove - 175 > this.x && mouse.xMove - 175 < this.x + this.w &&
-        mouse.yMove - 41 > this.y && mouse.yMove - 41 < this.y + this.h;
+    return mouse.xMove - 175 > this.x && mouse.xMove - 175 < this.x + Math.abs(this.w) &&
+        mouse.yMove - 41 > this.y && mouse.yMove - 41 < this.y + Math.abs(this.h);
 };
 
 Rect.prototype.move = function () {
@@ -35,8 +35,8 @@ Rect.prototype.move = function () {
 };
 
 Rect.prototype.goTo = function (mouse) {
-    this.x = mouse.xMove - 175 - this.w / 2;
-    this.y = mouse.yMove - 41 - this.h / 2;
+    this.x = mouse.xMove - 175 - Math.abs(this.w) / 2;
+    this.y = mouse.yMove - 41 - Math.abs(this.h) / 2;
 };
 
 function Circle(x, y, r, startAngle, endAngle, color, number, type) {
@@ -72,8 +72,8 @@ Circle.prototype.select = function () {
 };
 
 Circle.prototype.isCursorInFigure = function (mouse) {
-    return mouse.xMove - 175 > this.x - this.r && mouse.xMove - 175 < this.x + this.r
-        && mouse.yMove - 41 > this.y - this.r && mouse.yMove - 41 < this.y + this.r;
+    return mouse.xMove - 175 > this.x - Math.abs(this.r) && mouse.xMove - 175 < this.x + Math.abs(this.r)
+        && mouse.yMove - 41 > this.y - Math.abs(this.r) && mouse.yMove - 41 < this.y + Math.abs(this.r);
 };
 
 Circle.prototype.move = function () {
