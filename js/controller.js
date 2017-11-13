@@ -6,7 +6,6 @@ VECTORAPP.controller = (function () {
         jsonUtils = VECTORAPP.jsonUtils,
         figures = VECTORAPP.data.figures,
         shape = new Shape(),
-        ulArea = view.pageElements.ul,
         colorField = view.pageElements.colorField,
         jsonField = view.pageElements.jsonField,
 
@@ -47,8 +46,6 @@ VECTORAPP.controller = (function () {
         mouse.yUp = event.pageY;
     };
 
-    ulArea.addEventListener("click", onUlClick);
-
     document.addEventListener('click', function (e) {
 
         var target = e.target.id;
@@ -71,6 +68,18 @@ VECTORAPP.controller = (function () {
                 changeColor();
                 break;
 
+            case clickCases.square:
+                selectShapeMenu(square);
+                break;
+
+            case clickCases.circle:
+                selectShapeMenu(circle);
+                break;
+
+            case clickCases.line:
+                selectShapeMenu(line);
+                break;
+
         }
     });
 
@@ -80,15 +89,21 @@ VECTORAPP.controller = (function () {
         switch (getClickedButton()) {
 
             case clickCases.square:
-                figures.push(new Rect(mouse.xDown - 175, mouse.yDown - 41, mouse.xUp - mouse.xDown, mouse.yUp - mouse.yDown, shape.setColor(getColor(colorField)), shape.setNumber(figures.length), shape.setType(clickCases.square)));
+                figures.push(new Rect(mouse.xDown - 175, mouse.yDown - 41, mouse.xUp - mouse.xDown,
+                    mouse.yUp - mouse.yDown, shape.setColor(getColor(colorField)), shape.setNumber(figures.length),
+                    shape.setType(clickCases.square)));
                 break;
 
             case clickCases.circle:
-                figures.push(new Circle(mouse.xDown - 175, mouse.yDown - 41, mouse.xUp - mouse.xDown, 0, 2 * Math.PI, shape.setColor(getColor(colorField)), shape.setNumber(figures.length), shape.setType(clickCases.circle)));
+                figures.push(new Circle(mouse.xDown - 175, mouse.yDown - 41, mouse.xUp - mouse.xDown,
+                    0, 2 * Math.PI, shape.setColor(getColor(colorField)), shape.setNumber(figures.length),
+                    shape.setType(clickCases.circle)));
                 break;
 
             case clickCases.line:
-                figures.push(new Line(mouse.xDown - 175, mouse.yDown - 41, mouse.xUp - 175, mouse.yUp - 41, shape.setColor(getColor(colorField)), shape.setNumber(figures.length), shape.setType(clickCases.line)));
+                figures.push(new Line(mouse.xDown - 175, mouse.yDown - 41, mouse.xUp - 175, mouse.yUp - 41,
+                    shape.setColor(getColor(colorField)), shape.setNumber(figures.length),
+                    shape.setType(clickCases.line)));
                 break;
 
         }
@@ -98,7 +113,9 @@ VECTORAPP.controller = (function () {
                 figures[i].select();
             }
         }
+
         deselect();
+
     };
 
     view.getCanvas().ondblclick = function () {
@@ -116,12 +133,6 @@ VECTORAPP.controller = (function () {
             }
         }
         return clicked;
-    }
-
-    function onUlClick(event) {
-        var target = event.target;
-        if (target.tagName !== "LI") return;
-        selectShapeMenu(target);
     }
 
     function deselect() {

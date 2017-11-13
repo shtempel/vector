@@ -5,7 +5,6 @@ VECTORAPP.jsonUtils = (function () {
         jsonUtils;
 
     jsonUtils = {
-
         toJson: (function (jsonField) {
             jsonField.value = JSON.stringify(figures);
         }),
