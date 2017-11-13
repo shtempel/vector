@@ -1,19 +1,14 @@
 'use strict';
 
 VECTORAPP.view = (function () {
-    //var model = VECTORAPP.model;
     var view = {
         pageElements: {
             squareButton: document.getElementById("square"),
             circleButton: document.getElementById("circle"),
             lineButton: document.getElementById("line"),
             ul: document.getElementById("figures"),
-            colorField: document.getElementById("color_field"),
-            clearButton: document.getElementById("clear_btn"),
-            changeColorButton: document.getElementById("change_clr_btn"),
-            saveToJsonButton: document.getElementById("save_json_btn"),
-            loadFromJsonButton: document.getElementById("load_json_btn"),
-            jsonField: document.getElementById("json_txt_field")
+            colorField: document.getElementById("color-field"),
+            jsonField: document.getElementById("json-txt-field")
         },
 
         getFiguresButtons: function () {

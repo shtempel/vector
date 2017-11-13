@@ -75,14 +75,14 @@
 }
 
 .square {
-    background: url("./pics/square.jpg") center no-repeat;
+    background: url("../pics/square.jpg") center no-repeat;
 
 }
 
 .circle {
-    background: url("./pics/circle.jpg") center no-repeat;
+    background: url("../pics/circle.jpg") center no-repeat;
 }
 
 .line {
-    background: url("./pics/line.jpg") center no-repeat;
+    background: url("../pics/line.jpg") center no-repeat;
 }

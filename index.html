@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Canvass</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style/style.css">
 </head>
 <body>
 <div class="main">
@@ -15,28 +15,30 @@
         </ul>
         <div>
             <label>Color:</label>
-            <input id="color_field" class="color">
-            <button id="change_clr_btn" class="chng_clr">Change color</button>
+            <input id="color-field" class="color">
+            <button id="change-clr-btn" class="chng-clr">Change color</button>
         </div>
     </div>
     <div class="canvas">
         <canvas id="canvas" width="500" height="400"></canvas>
     </div>
     <div class="json-btns">
-        <button class="sv" id="save_json_btn">Save to json</button>
-        <button class="ld" id="load_json_btn">Load from json</button>
-        <button class="clear" id="clear_btn">Clear all</button>
+        <button class="sv" id="save-json-btn">Save to json</button>
+        <button class="ld" id="load-json-btn">Load from json</button>
+        <button class="clear" id="clear-btn">Clear all</button>
 
     </div>
     <div class="bottom">
-        <textarea id="json_txt_field" class="txt-area"></textarea>
+        <textarea id="json-txt-field" class="txt-area"></textarea>
     </div>
 </div>
+<script src="./libs/jquery.js"></script>
+
 
 <script type="text/javascript" src="./js/init.js"></script>
-<script type="text/javascript" src="./js/data.js"></script>
-<script type="text/javascript" src="./js/render.js"></script>
 <script type="text/javascript" src="./js/view.js"></script>
+<script type="text/javascript" src="./js/data.js"></script>
+<script type="text/javascript" src="./js/json-utils.js"></script>
 <script type="text/javascript" src="./js/model.js"></script>
 <script type="text/javascript" src="./js/controller.js"></script>
 

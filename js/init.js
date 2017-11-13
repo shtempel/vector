@@ -1,8 +1,8 @@
 'use strict';
 
 var VECTORAPP = {
-    render: null,
     controller: null,
-    model: null,
-    view: null
+    view: null,
+    jsonUtils: null,
+    data: null
 };

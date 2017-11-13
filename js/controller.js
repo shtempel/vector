@@ -2,10 +2,14 @@
 
 VECTORAPP.controller = (function () {
 
-    var model = VECTORAPP.model,
-        view = VECTORAPP.view,
-        figures = [],
+    var view = VECTORAPP.view,
+        jsonUtils = VECTORAPP.jsonUtils,
+        figures = VECTORAPP.data.figures,
         shape = new Shape(),
+        ulArea = view.pageElements.ul,
+        colorField = view.pageElements.colorField,
+        jsonField = view.pageElements.jsonField,
+
         mouse = {
             xUp: 0,
             yUp: 0,
@@ -13,7 +17,19 @@ VECTORAPP.controller = (function () {
             yDown: 0,
             xMove: 0,
             yMove: 0
+        },
+
+        clickCases = {
+            save: 'save-json-btn',
+            load: 'load-json-btn',
+            clear: 'clear-btn',
+            square: 'square',
+            circle: 'circle',
+            line: 'line',
+            color: 'change-clr-btn'
         };
+
+    view.render(figures, mouse);
 
     view.getCanvas().onmousemove = function (event) {
         mouse.xMove = event.pageX;
@@ -31,23 +47,50 @@ VECTORAPP.controller = (function () {
         mouse.yUp = event.pageY;
     };
 
-    view.pageElements.ul.addEventListener("click", onUlClick);
+    ulArea.addEventListener("click", onUlClick);
 
+    document.addEventListener('click', function (e) {
 
-    view.render(figures, mouse);
+        var target = e.target.id;
+
+        switch (target) {
+
+            case clickCases.save:
+                jsonUtils.toJson(jsonField);
+                break;
+
+            case clickCases.load:
+                jsonUtils.fromJson(jsonField);
+                break;
+
+            case clickCases.clear:
+                removeAll();
+                break;
+
+            case clickCases.color:
+                changeColor();
+                break;
+
+        }
+    });
+
 
     view.getCanvas().onclick = function () {
 
         switch (getClickedButton()) {
-            case 'square':
-                figures.push(new Rect(mouse.xDown - 175, mouse.yDown - 41, mouse.xUp - mouse.xDown, mouse.yUp - mouse.yDown, shape.setColor(color(view.pageElements.colorField)), shape.setNumber(number(figures)), shape.setType(getClickedButton())));
+
+            case clickCases.square:
+                figures.push(new Rect(mouse.xDown - 175, mouse.yDown - 41, mouse.xUp - mouse.xDown, mouse.yUp - mouse.yDown, shape.setColor(getColor(colorField)), shape.setNumber(figures.length), shape.setType(clickCases.square)));
                 break;
-            case 'circle':
-                figures.push(new Circle(mouse.xDown - 175, mouse.yDown - 41, mouse.xUp - mouse.xDown, 0, 2 * Math.PI, shape.setColor(color(view.pageElements.colorField)), shape.setNumber(number(figures)), shape.setType(getClickedButton())));
+
+            case clickCases.circle:
+                figures.push(new Circle(mouse.xDown - 175, mouse.yDown - 41, mouse.xUp - mouse.xDown, 0, 2 * Math.PI, shape.setColor(getColor(colorField)), shape.setNumber(figures.length), shape.setType(clickCases.circle)));
                 break;
-            case 'line':
-                figures.push(new Line(mouse.xDown - 175, mouse.yDown - 41, mouse.xUp - 175, mouse.yUp - 41, shape.setColor(color(view.pageElements.colorField)), shape.setNumber(number(figures)), shape.setType(getClickedButton())));
+
+            case clickCases.line:
+                figures.push(new Line(mouse.xDown - 175, mouse.yDown - 41, mouse.xUp - 175, mouse.yUp - 41, shape.setColor(getColor(colorField)), shape.setNumber(figures.length), shape.setType(clickCases.line)));
                 break;
+
         }
 
         for (var i in figures) {
@@ -58,6 +101,14 @@ VECTORAPP.controller = (function () {
         deselect();
     };
 
+    view.getCanvas().ondblclick = function () {
+        for (var i in figures) {
+            if (figures[i].isCursorInFigure(mouse)) {
+                figures[i].move();
+            }
+        }
+    };
+
     function getClickedButton() {
         for (var i = 0; i < view.getFiguresButtons().length; i++) {
             if (view.getFiguresButtons()[i].getAttribute("selected") === 'true') {
@@ -66,7 +117,6 @@ VECTORAPP.controller = (function () {
         }
         return clicked;
     }
-
 
     function onUlClick(event) {
         var target = event.target;
@@ -85,11 +135,8 @@ VECTORAPP.controller = (function () {
         li.setAttribute("selected", "true");
     }
 
-    function getFiguresButtons() {
-        return [view.pageElements.squareButton, view.pageElements.circleButton, view.pageElements.lineButton];
-    }
 
-    function color(colorField) {
+    function getColor(colorField) {
         if (colorField.value === "") {
             return "black";
         } else {
@@ -97,8 +144,17 @@ VECTORAPP.controller = (function () {
         }
     }
 
-    function number(figures) {
-        return figures.length;
+    function removeAll() {
+        for (var i = figures.length; i--;) {
+            figures.splice(i, 1);
+        }
+    }
+
+    function changeColor() {
+        for (var i in figures) {
+            if (figures[i].selected)
+                figures[i].color = getColor(view.pageElements.colorField);
+        }
     }
 
 })();
