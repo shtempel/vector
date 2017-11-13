@@ -1,122 +1,152 @@
-var hRect;
-hRect = 20;
+'use strict';
 
-function Rect(x, y, w, h, color, number, type) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-    this.color = color;
-    this.number = number;
-    this.type = type;
-}
+//VECTORAPP.model = (function () {
+    var view = VECTORAPP.view;
+    var hRect;
+    hRect = 20;
+    var Shape = function () {
 
-Rect.prototype = new Shape();
-Rect.prototype.draw = function () {
-    view.getCanvasContext().strokeStyle = this.color;
-    view.getCanvasContext().strokeRect(this.x, this.y, Math.abs(this.w), Math.abs(this.h))  ;
-};
+    };
 
-Rect.prototype.drawSelected = function () {
-    view.getCanvasContext().strokeStyle = "gray";
-    view.getCanvasContext().strokeRect(this.x - 6, this.y - 6, Math.abs(this.w) + 12, Math.abs(this.h) + 12);
-};
-Rect.prototype.select = function () {
-    this.selected = !this.selected;
-};
+    Shape.prototype = {
+        setNumber: function (number) {
+            return number;
+        },
 
-Rect.prototype.isCursorInFigure = function (mouse) {
-    return mouse.xMove - 175 > this.x && mouse.xMove - 175 < this.x + Math.abs(this.w) &&
-        mouse.yMove - 41 > this.y && mouse.yMove - 41 < this.y + Math.abs(this.h);
-};
+        setColor: function (color) {
+            return color
+        },
 
-Rect.prototype.move = function () {
-    this.moving = !this.moving;
-};
+        setType: function (type) {
+            return type;
+        },
 
-Rect.prototype.goTo = function (mouse) {
-    this.x = mouse.xMove - 175 - Math.abs(this.w) / 2;
-    this.y = mouse.yMove - 41 - Math.abs(this.h) / 2;
-};
+        select: function () {
+            this.selected = !this.selected;
+        },
 
-function Circle(x, y, r, startAngle, endAngle, color, number, type) {
-    this.x = x;
-    this.y = y;
-    this.r = r;
-    this.startAngle = startAngle;
-    this.endAngle = endAngle;
-    this.color = color;
-    this.number = number;
-    this.type = type;
-}
+        draw: function () {
 
-Circle.prototype = new Shape();
-Circle.prototype.draw = function () {
-    view.getCanvasContext().strokeStyle = this.color;
-    view.getCanvasContext().beginPath();
-    view.getCanvasContext().arc(this.x, this.y, Math.abs(this.r), this.startAngle, this.endAngle);
-    view.getCanvasContext().stroke();
-    view.getCanvasContext().closePath();
-};
+        }
 
-Circle.prototype.drawSelected = function () {
-    view.getCanvasContext().strokeStyle = "gray";
-    view.getCanvasContext().beginPath();
-    view.getCanvasContext().arc(this.x, this.y, Math.abs(this.r) + 6, this.startAngle, this.endAngle);
-    view.getCanvasContext().stroke();
-    view.getCanvasContext().closePath();
-};
+    };
 
-Circle.prototype.select = function () {
-    this.selected = !this.selected;
-};
+    function Rect(x, y, w, h, color, number, type) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.color = color;
+        this.number = number;
+        this.type = type;
+    }
 
-Circle.prototype.isCursorInFigure = function (mouse) {
-    return mouse.xMove - 175 > this.x - Math.abs(this.r) && mouse.xMove - 175 < this.x + Math.abs(this.r)
-        && mouse.yMove - 41 > this.y - Math.abs(this.r) && mouse.yMove - 41 < this.y + Math.abs(this.r);
-};
+    Rect.prototype = new Shape();
+    Rect.prototype.draw = function () {
+        view.getCanvasContext().strokeStyle = this.color;
+        view.getCanvasContext().strokeRect(this.x, this.y, Math.abs(this.w), Math.abs(this.h));
+    };
 
-Circle.prototype.move = function () {
-    this.moving = !this.moving;
-};
+    Rect.prototype.drawSelected = function () {
+        view.getCanvasContext().strokeStyle = "gray";
+        view.getCanvasContext().strokeRect(this.x - 6, this.y - 6, Math.abs(this.w) + 12, Math.abs(this.h) + 12);
+    };
+    Rect.prototype.select = function () {
+        this.selected = !this.selected;
+    };
 
-Circle.prototype.goTo = function (mouse) {
-    this.x = mouse.xMove - 175;
-    this.y = mouse.yMove - 41;
-};
+    Rect.prototype.isCursorInFigure = function (mouse) {
+        return mouse.xMove - 175 > this.x && mouse.xMove - 175 < this.x + Math.abs(this.w) &&
+            mouse.yMove - 41 > this.y && mouse.yMove - 41 < this.y + Math.abs(this.h);
+    };
 
-function Line(x, y, w, h, color, number, type) {
-    this.x = x;
-    this.y = y;
-    this.x2 = w;
-    this.y2 = h;
-    this.color = color;
-    this.number = number;
-    this.type = type;
-}
+    Rect.prototype.move = function () {
+        this.moving = !this.moving;
+    };
 
-Line.prototype = new Shape();
-Line.prototype.draw = function () {
-    view.getCanvasContext().strokeStyle = this.color;
-    view.getCanvasContext().beginPath();
-    view.getCanvasContext().moveTo(this.x, this.y);
-    view.getCanvasContext().lineTo(this.x2, this.y2);
-    view.getCanvasContext().stroke();
-};
+    Rect.prototype.goTo = function (mouse) {
+        this.x = mouse.xMove - 175 - Math.abs(this.w) / 2;
+        this.y = mouse.yMove - 41 - Math.abs(this.h) / 2;
+    };
+
+    function Circle(x, y, r, startAngle, endAngle, color, number, type) {
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.startAngle = startAngle;
+        this.endAngle = endAngle;
+        this.color = color;
+        this.number = number;
+        this.type = type;
+    }
+
+    Circle.prototype = new Shape();
+    Circle.prototype.draw = function () {
+        view.getCanvasContext().strokeStyle = this.color;
+        view.getCanvasContext().beginPath();
+        view.getCanvasContext().arc(this.x, this.y, Math.abs(this.r), this.startAngle, this.endAngle);
+        view.getCanvasContext().stroke();
+        view.getCanvasContext().closePath();
+    };
+
+    Circle.prototype.drawSelected = function () {
+        view.getCanvasContext().strokeStyle = "gray";
+        view.getCanvasContext().beginPath();
+        view.getCanvasContext().arc(this.x, this.y, Math.abs(this.r) + 6, this.startAngle, this.endAngle);
+        view.getCanvasContext().stroke();
+        view.getCanvasContext().closePath();
+    };
+
+    Circle.prototype.select = function () {
+        this.selected = !this.selected;
+    };
+
+    Circle.prototype.isCursorInFigure = function (mouse) {
+        return mouse.xMove - 175 > this.x - Math.abs(this.r) && mouse.xMove - 175 < this.x + Math.abs(this.r)
+            && mouse.yMove - 41 > this.y - Math.abs(this.r) && mouse.yMove - 41 < this.y + Math.abs(this.r);
+    };
+
+    Circle.prototype.move = function () {
+        this.moving = !this.moving;
+    };
+
+    Circle.prototype.goTo = function (mouse) {
+        this.x = mouse.xMove - 175;
+        this.y = mouse.yMove - 41;
+    };
+
+    function Line(x, y, w, h, color, number, type) {
+        this.x = x;
+        this.y = y;
+        this.x2 = w;
+        this.y2 = h;
+        this.color = color;
+        this.number = number;
+        this.type = type;
+    }
+
+    Line.prototype = new Shape();
+    Line.prototype.draw = function () {
+        view.getCanvasContext().strokeStyle = this.color;
+        view.getCanvasContext().beginPath();
+        view.getCanvasContext().moveTo(this.x, this.y);
+        view.getCanvasContext().lineTo(this.x2, this.y2);
+        view.getCanvasContext().stroke();
+    };
 
 
-Line.prototype.drawSelected = function () {
-    view.getCanvasContext().save();
-    view.getCanvasContext().strokeStyle = "gray";
-    view.getCanvasContext().translate((this.x + this.x2) / 2, (this.y + this.y2) / 2);
-    view.getCanvasContext().rotate(Math.atan2(this.y2 - this.y, this.x2 - this.x));
-    view.getCanvasContext().strokeRect(-(Math.sqrt(Math.pow((this.x2 - this.x), 2) + Math.pow((this.y2 - this.y), 2))) / 2, -hRect / 2,
-        Math.sqrt(Math.pow((this.x2 - this.x), 2) + Math.pow((this.y2 - this.y), 2)), hRect);
-    view.getCanvasContext().restore();
-};
+    Line.prototype.drawSelected = function () {
+        view.getCanvasContext().save();
+        view.getCanvasContext().strokeStyle = "gray";
+        view.getCanvasContext().translate((this.x + this.x2) / 2, (this.y + this.y2) / 2);
+        view.getCanvasContext().rotate(Math.atan2(this.y2 - this.y, this.x2 - this.x));
+        view.getCanvasContext().strokeRect(-(Math.sqrt(Math.pow((this.x2 - this.x), 2) + Math.pow((this.y2 - this.y), 2))) / 2, -hRect / 2,
+            Math.sqrt(Math.pow((this.x2 - this.x), 2) + Math.pow((this.y2 - this.y), 2)), hRect);
+        view.getCanvasContext().restore();
+    };
 
-Line.prototype.isCursorInFigure = function () {
-    // return true;
-};
+    Line.prototype.isCursorInFigure = function () {
+        // return true;
+    };
 
-var shape = new Shape();
+//})();

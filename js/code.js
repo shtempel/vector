@@ -1,13 +1,4 @@
-function include(url) {
-    const script = document.createElement('script');
-    script.src = url;
-    document.getElementsByTagName('head')[0].appendChild(script);
-}
-
-include("./js/utils.js");
-include("./js/model.js");
-
-var Shape = function () {
+/*var Shape = function () {
 
 };
 
@@ -62,7 +53,6 @@ View.prototype = {
         view.getCanvasContext().strokeStyle = "black";
         view.getCanvasContext().lineWidth = 2;
         setInterval(function () {
-                //clear();
                 view.getCanvasContext().clearRect(0, 0, view.getCanvas().width, view.getCanvas().height);
                 for (var i = 0; i < figures.length; i++) {
                     figures[i].draw();
@@ -134,6 +124,7 @@ var Controller = function (shape, view) {
             removeFigure(figures);
         }
     };
+
     view.getCanvas().onmousemove = function (event) {
         mouse.xMove = event.pageX;
         mouse.yMove = event.pageY;
@@ -206,4 +197,4 @@ var Controller = function (shape, view) {
 
 var shape = new Shape();
 var view = new View();
-Controller(shape, view);
+Controller(shape, view);*/
